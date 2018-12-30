@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <title>Cuckoo - Come to See TOP Movie</title>
+
+    <!-- global stylesheets -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/font-icon-style.css">
+    <link rel="stylesheet" href="/static/css/style.default.css" >
+    <link rel="stylesheet" href={{css}}>
+    <link rel="stylesheet" href="/static/css/select2.min.css" >
+    <!-- Core stylesheets -->
+</head>
+
+<body style="height:1100px">
+    <!-- Header -->
+    <header class="header sticky-header">
+        <div class="container">
+            <div class="header-inner d-none d-lg-flex">
+                <div class="header-logo">
+                    <a href={{home}}>
+                        <img src={{logo}}>
+                    </a>
+                </div>
+                <div class="header-navigation">
+                    <button class="header-navigation-trigger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <nav class="main-navigation">
+                        <ul>
+                            <li><a href={{home}}>HOME</a>
+                                <ul>
+                                    <li><a href="../index">Home Default Version</a></li>
+                                    <li><a href="../index-dark">Home Dark Version</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Eye</a>
+                                <ul>
+                                        <li><a href="../movie-top/0">Default</a></li>
+                                        <li><a href="../movie-top/1">Dark</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Services</a>
+                                <ul>
+                                    <li><a href="../table/{{bg}}">Movie Table</a></li>
+                                    <li><a href="../trend/{{bg}}">Movie Trend</a></li>
+                                    <li><a href="../actors/{{bg}}">Model Actors</a></li>
+                                    <li><a href="../share/{{bg}}">Box Office Share</a></li>
+                                </ul>
+                            </li>
+                            <li><a href={{in}}>{{name}}</a>
+                            <ul>
+                                <li style="display:{{in_dis}}"><a href={{in}}>{{name}}</a></li>
+                                <li style="display:{{out_dis}}"><a onclick="return confirm('Are you sure to log out ?')" href={{out}}>Log Out</a></li>
+                            </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--// Header -->
+    <div class="page-content d-flex align-items-stretch">
+
+        <!--***** SIDE NAVBAR *****-->
+        <nav class="side-navbar">
+            <div class="sidebar-header d-flex align-items-center">
+                <div class="avatar"><img src="/static/img/header.png" alt="..." class="img-fluid rounded-circle"></div>
+                <div class="title">
+                    <h1 class="h4">{{the_user}}</h1>
+                </div>
+            </div>
+            <hr>
+            <!-- Sidebar Navidation Menus-->
+            <ul class="list-unstyled">
+                <li> <a href={{home}}><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="#apps" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-bar-chart"></i>Services </a>
+                    <ul id="apps" class="collapse list-unstyled">
+                        <li><a href="../table/{{bg}}">Movie Table</a></li>
+                        <li><a href="../trend/{{bg}}">Movie Trend</a></li>
+                        <li><a href="../actors/{{bg}}">Model Actors</a></li>
+                        <!--<li><a href=" ">Box Office Share</a></li>-->
+                    </ul>
+                </li>
+                <li><a href="#elements" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-star"></i>Favorite </a>
+                    <ul id="elements" class="collapse list-unstyled">
+                        {% for fav in the_user.favorite_set.all %}
+                            <li><a href="#" onclick="window.open('{{fav.movie_url}}')">{{fav.movie_name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li><a href="#pages" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-file-image-o"></i>History </a>
+                    <ul id="pages" class="collapse list-unstyled">
+                        {% for img in the_user.history_set.all %}
+                            <li id="{{img.image_name}}">
+                                <a href="{{img.data_url}}" download="{{img.image_name}}">
+                                    <img src="{{img.data_url}}" id="{{img.image_name}}"/>
+                                </a>
+                                <a href="#" onclick="delimg('{{img.image_name}}')" name="{{img.image_name}}">
+                                    <i class="fa fa-trash-o"></i>{{img.image_name}}
+                                </a>
+                            </li>
+                            <!--<li><a href="{{img.data_url}}">{{img.image_name}}</a></li>-->
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div class="content-inner chart-cont">
+
+            <form action="" method="get">
+                <table style="border-bottom: 0; font-size:20px">
+                    <tr><td><input type="submit" value="— Save All —"  style="border:2px; font-size:20px;" /></td></tr>
+                </table>
+            </form>
+
+            <!--***** CONTENT *****-->
+            <div class="row">
+                <div class="col-md-10 mt-2" style="margin: 0 auto">
+                    <div class="card">
+                        <div class="dropdown pull-right menu-sett-card" >
+                            <a id="notifications" class="nav-link" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-ellipsis-v men"></i>
+                            </a>
+                            <ul aria-labelledby="notifications" class="dropdown-menu">
+                                <li>
+                                    <button class="dropdown-item nav-link" id="save">Download Image</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-block" id="div-bar">
+                            <div id="e-bar" style="width: 800px; height: 700px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--Global Javascript -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/tether.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/jquery.validate.min.js"></script>
+    <script src="/static/js/chart.min.js"></script>
+    <script src="/static/js/front.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/plugins.js"></script>
+	<script src="/static/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
+    <script src="/static/js/echarts.min.js"></script>
+
+    <!--Core Javascript -->
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $(".js-example-basic-multiple").select2({
+        placeholder: "———"
+      }
+
+        );
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $(".js-example-basic-single").select2({
+      }
+
+        );
+    });
+    </script>
+    <script>
+        let prtW = window.opener;
+        if(prtW!=null){
+        let plabel = prtW.document.getElementById("plabel").value;
+        let pdata = prtW.document.getElementById("pdata").value;
+        console.log(plabel);
+        console.log(pdata);
+
+        let labels_color = ['#9e7a7a', '#b19693', '#808f7c', '#b9887d', '#566c73',
+                                    '#648e93', '#91989f', '#787d7b', '#707c74', '#4f4f48'];
+        let mychart = echarts.init(document.getElementById('e-bar'));
+        let option = {
+            fontWeight:'lighter',
+            tooltip : {
+                trigger: 'axis',
+                formatter: '{b0}:{c0}亿',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : plabel.split(','),
+                    axisTick: {
+                        show:false,
+                        alignWithLabel: true
+                    },
+                    axisLabel:{
+                        interval: 0,
+                        formatter:function (value) {
+                            return value.split('').join('\n');
+                        }
+                    },
+                    axisLine:{show:false},
+                    splitLine:{show:false},
+                }
+            ],
+            yAxis : [
+                {
+                    axisLine:{show:false},
+                    splitLine:{show:false},
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'票房',
+                    type:'bar',
+                    barWidth: '80%',
+                    data:pdata.split(','),
+                    itemStyle:{
+                        normal: {
+                            color: function (params) {
+                                return labels_color[params.dataIndex];
+                            }
+                        }
+                    },
+                },
+            ]
+        };
+        mychart.setOption(option);
+
+        }
+    </script>
+    <script type="text/javascript">
+        $("#save").click(function () {
+            console.log("111");
+            let myCanvas = $("#e-bar").find("canvas")[0];
+            var image = myCanvas.toDataURL();
+            <!--console.log(image);-->
+            var img_name = prompt("请输入文件名", "img");
+            if (img_name == null)
+            {
+                console.log("cancel save");
+            }
+            else {
+                $.ajax({
+                url:'deal-img',
+                type: 'POST',
+                async:true,
+                data:{
+                    name:img_name,
+                    imgurl:image,
+                },
+                success:function (result) {
+                    console.log(result.name);
+                    let img_set = document.getElementById('pages');
+                    let li = document.createElement("li");
+                    let a1 = document.createElement("a");
+                    let a2 = document.createElement("a");
+                    let img = document.createElement("img");
+                    let a2_a = document.createElement("a");
+                    a2_a.innerText = result.name;
+                    li.id = result.name;
+                    a2.name = result.name;
+                    img.src = result.imgurl;
+                    a2.id = 'a' + result.name;
+                    a2.innerText = result.name;
+                    a1.appendChild(img);
+                    li.appendChild(a1);
+                    li.appendChild(a2);
+                    img_set.appendChild(li);
+                },
+                error:function(result) {
+                        alert('ajax:ERROR');
+                },
+            });
+            saveFile(image,img_name);
+            }
+        });
+
+        var saveFile = function(data, filename){
+        var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+        save_link.href = data;
+        save_link.download = filename;
+
+        var event = document.createEvent('MouseEvents');
+        event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        save_link.dispatchEvent(event);
+        }
+
+    </script>
+    <script>
+        function delimg(logname) {
+            console.log(logname);
+            $.ajax({
+                url:'delimg',
+                type:'post',
+                async:true,
+                data:{
+                    logname:logname,
+                },
+                success:function (result) {
+                    let history_item = document.getElementById(logname);
+                    history_item.parentNode.removeChild(history_item);
+                    console.log(result.message);
+                },
+                error:function(result) {
+                        alert('ajax:ERROR');
+                },
+
+            });
+
+        }
+    </script>
+<!--Core Javascript -->
+{#    <script src="/static/js/chart-page.js"></script>#}
+</body>
+
+</html>
