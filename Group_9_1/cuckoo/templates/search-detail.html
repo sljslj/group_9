@@ -1,0 +1,228 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Cuckoo - Search What you want</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+	<!-- Google font (font-family: 'Dosis', sans-serif;) -->
+	<link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700" rel="stylesheet">
+	
+	<!-- Plugins -->
+	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/css/plugins.css">
+
+	<!-- Style Css -->
+	<link rel="stylesheet" href="/static/css/style.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href={{css}}>
+
+	<!-- Custom Styles -->
+	<link rel="stylesheet" href="/static/css/custom.css">
+
+
+</head>
+
+<body >
+	<!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+	<!-- Add your site or application content here -->
+
+	<!-- Wrapper -->
+	<div id="wrapper" class="wrapper">
+
+		<!-- Header -->
+		<header class="header sticky-header">
+			<div class="container">
+				<div class="header-inner d-none d-lg-flex">
+					<div class="header-logo">
+						<a href={{ home }}>
+							<img src={{logo}} alt="logo">
+						</a>
+					</div>
+					<div class="header-navigation">
+                        <button class="header-navigation-trigger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                        <nav class="main-navigation">
+                            <ul>
+                                <li><a href={{home}}>HOME</a>
+                                    <ul>
+                                        <li><a href="../index">Home Default Version</a></li>
+                                        <li><a href="../index-dark">Home Dark Version</a></li>
+                                    </ul>
+                                </li>
+{#                                <li><a href="#">Eye</a>#}
+{#                                    <ul>#}
+{#                                            <li><a href="../index">Default</a></li>#}
+{#                                            <li><a href="../index-dark">Dark</a></li>#}
+{#                                    </ul>#}
+{#                                </li>#}
+                                <li><a href="#">Services</a>
+											<ul>
+												<li><a href="../table/{{ bg }}">Movie Table</a></li>
+												<li><a href="../trend/{{ bg }}">Movie Trend</a></li>
+												<li><a href="../actors/{{ bg }}">Model Actors</a></li>
+												<li><a href="../share/{{ bg }}">Box Office Share</a></li>
+											</ul>
+                                </li>
+                                <li><a href={{in}}>{{name}}</a>
+                                    <ul>
+                                        <li style="display:{{in_dis}}"><a href={{in}}>{{name}}</a></li>
+                                        <li style="display:{{out_dis}}"><a onclick="return confirm('Are you sure to log out ?')" href={{out}}>Log Out</a></li>
+                                    </ul>
+                                <li><a></a>
+                                </li>
+                            </ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!--// Header -->
+
+		<!-- Page Conttent -->
+		<main class="page-content">
+
+            <!-- Blog Area -->
+            <div class="cr-section blog-area section-padding-lg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-9 col-lg-8 col-12 order-1 order-lg-2">
+                            <div class="row">
+
+                                <!-- Single Blog -->
+                                {% for film in the_input.searchresult_set.all %}
+                                    <div class="col-xl-6 col-lg-12 col-md-6 col-12">
+                                    <article class="blog-item">
+                                        <header class="blog-item-header">
+                                            <a href="#" onclick="window.open('{{film.movie_url}}')">
+                                                <img src="/static/img/blog/blog-image-2.jpg" alt="blog thumb">
+                                            </a>
+                                        </header>
+                                         <div class="blog-item-body">
+                                                <h6 class="blog-item-title">
+                                                    <a href="#" onclick="window.open('{{film.movie_url}}')">
+                                                        {{ film.movie_name }}
+                                                    </a>
+                                                </h6>
+                                                <p>{{ film.movie_score }}</p>
+                                                <p>{{ film.movie_star_all }}</p>
+                                         </div>
+                                        <input type="button" class="button"  id="collect{{ film.id }}" value="{{ film.favorite_msg }}" name="{{ film.movie_name }}" onclick="collect(this)" placeholder="{{film.movie_url}}">
+
+{#                                            </ul>#}
+{#                                        </footer>#}
+                                    </article>
+                                    </div>
+                                {% endfor %}
+                                <!--// Single Blog -->
+
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-12 order-2 order-lg-1 sticky-sidebar-active">
+                            <div class="widgets">
+
+                                <!-- Single Widget -->
+                                <section class="single-widget widget-search">
+                                    <h5 class="widget-title">SEARCH</h5>
+                                    <form action="../index/" method="post">
+                                        <input placeholder="{{ the_input }}" name="search" type="search">
+                                        <button type="submit" s><i class="fa fa-search"></i></button>
+                                    </form>
+                                </section>
+                                <!--// Single Widget -->
+
+                                <!-- Single Widget -->
+                                <section class="single-widget widget-related-post">
+                                    <h5 class="widget-title">{{the_user}}'s Favorite</h5>
+                                    <ul>
+                                        {% for fav in the_user.favorite_set.all %}
+                                            <li>
+                                                <div class="image">
+                                                    <a href="#" onclick="window.open('{{fav.movie_url}}')">
+                                                        <img src="/static/img/star.png" alt="blog thumb">
+                                                    </a>
+                                                </div>
+                                                <div class="content">
+                                                    <h6><a href="#" onclick="window.open('{{fav.movie_url}}')">{{fav.movie_name}}</a></h6>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                        <!--<li>-->
+                                            <!--<div class="image">-->
+                                                <!--<a href="blog-details.html">-->
+                                                    <!--<img src="/static/img/star.png" alt="blog thumb">-->
+                                                <!--</a>-->
+                                            <!--</div>-->
+                                            <!--<div class="content">-->
+                                                <!--<h6><a href="blog-details.html">Movie One</a></h6>-->
+                                                <!--<span>Text</span>-->
+                                            <!--</div>-->
+                                        <!--</li>-->
+                                    </ul>
+                                </section>
+                                <!--// Single Widget -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--// Blog Area -->
+
+		</main>
+		<!--// Page Conttent -->
+
+	</div>
+	<!--// Wrapper -->
+	<!-- Js Files -->
+    <script src="/static/js/vendor/modernizr-3.6.0.min.js"></script>
+	<script src="/static/js/vendor/jquery-3.3.1.min.js"></script>
+	<script src="/static/js/popper.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/plugins.js"></script>
+	<script src="/static/js/main.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/jquery.validate.min.js"></script>
+    <script>
+        function collect(self) {
+            console.log(self.name);
+            $.ajax({
+                url:'deal-collect/',
+                type:'post',
+                async:true,
+                data:{
+                    url:self.placeholder,
+                    moviename:self.name,
+                },
+                success:function (result) {
+                    console.log(result.message);
+                    if (result.message === '收藏成功'){
+                        self.value = '已收藏'
+                    }
+                    else {
+                        self.value = '收藏'
+                    }
+                },
+                error:function(result) {
+                        alert('ajax:ERROR');
+                },
+
+
+            });
+        }
+    </script>
+</body>
+
+</html>

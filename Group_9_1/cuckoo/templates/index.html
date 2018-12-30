@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Cuckoo - Take time to movies</title>
+		<link rel="stylesheet" href="/static/css/demo.css">
+		<link rel="stylesheet" href="/static/css/style9.css" >
+		<link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700" rel="stylesheet">
+
+		<!-- Plugins -->
+		<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/css/plugins.css">
+
+		<!-- Style Css -->
+		<link rel="stylesheet" href="/static/css/style.css">
+
+		<!-- Custom Styles -->
+		<link rel="stylesheet" href="/static/css/custom.css">
+
+		<link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css'>
+		<!--[if IE]>
+  		<script src="http://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.js"></script>
+		<![endif]--><script>document.documentElement.className = 'js';</script>
+	</head>
+	<body class="demo-9">
+		<svg class="hidden">
+			<defs>
+				<symbol id="icon-arrow" viewBox="0 0 24 24">
+					<title>arrow</title>
+					<polygon points="6.3,12.8 20.9,12.8 20.9,11.2 6.3,11.2 10.2,7.2 9,6 3.1,12 9,18 10.2,16.8 "/>
+				</symbol>
+				<symbol id="icon-drop" viewBox="0 0 24 24">
+					<title>drop</title>
+					<path d="M12,21c-3.6,0-6.6-3-6.6-6.6C5.4,11,10.8,4,11.4,3.2C11.6,3.1,11.8,3,12,3s0.4,0.1,0.6,0.3c0.6,0.8,6.1,7.8,6.1,11.2C18.6,18.1,15.6,21,12,21zM12,4.8c-1.8,2.4-5.2,7.4-5.2,9.6c0,2.9,2.3,5.2,5.2,5.2s5.2-2.3,5.2-5.2C17.2,12.2,13.8,7.3,12,4.8z"/><path d="M12,18.2c-0.4,0-0.7-0.3-0.7-0.7s0.3-0.7,0.7-0.7c1.3,0,2.4-1.1,2.4-2.4c0-0.4,0.3-0.7,0.7-0.7c0.4,0,0.7,0.3,0.7,0.7C15.8,16.5,14.1,18.2,12,18.2z"/>
+				</symbol>
+				<symbol id="icon-search" viewBox="0 0 24 24">
+					<title>search</title>
+					<path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+				</symbol>
+				<symbol id="icon-cross" viewBox="0 0 24 24">
+					<title>cross</title>
+					<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+				</symbol>
+			</defs>
+		</svg>
+		<main class="main-wrap">
+			<!-- Wrapper -->
+			<div id="wrapper" class="wrapper" style="height:100%;width:100%">
+
+				<span class="cursor"></span>
+
+				<!-- Header -->
+				<header class="header sticky-header fixed-header" style="position: fixed; background: white">
+					<div class="container">
+						<div class="header-inner d-none d-lg-flex">
+							<div class="header-logo">
+								<a href="../index">
+									<img src="/static/img/logo/white.png" alt="logo">
+								</a>
+							</div>
+							<div class="header-navigation">
+								<button class="header-navigation-trigger">
+									<span></span>
+									<span></span>
+									<span></span>
+								</button>
+								<nav class="main-navigation">
+									<ul>
+										<li><a href="../index">HOME</a>
+											<ul>
+												<li><a href="../index">Home Default Version</a></li>
+												<li><a href="../index-dark">Home Dark Version</a></li>
+											</ul>
+										</li>
+										<li><a href="#">Services</a>
+											<ul>
+												<li><a href="../table/0">Movie Table</a></li>
+												<li><a href="../trend/0">Movie Trend</a></li>
+												<li><a href="../actors/0">Model Actors</a></li>
+												<li><a href="../share/0">Box Office Share</a></li>
+											</ul>
+										</li>
+										<li><a href={{in}}>{{name}}</a>
+											<ul>
+												<li style="display:{{in_dis}}"><a href={{in}}>{{name}}</a></li>
+												<li style="display:{{out_dis}}"><a onclick="return confirm('Are you sure to log out ?')" href={{out}}>Log Out</a></li>
+											</ul>
+										</li>
+										<li><a></a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+						<header style=".codrops-header ">
+							<div style=".search-wrap">
+								<button style="float:right;opacity:1;box-shadow:none;" id="btn-search" class="btn btn--search"><svg class="icon icon--search"><use href="#icon-search"></use></svg></button>
+							</div>
+						</header>
+						<div class="mobile-menu-wrapper d-block d-lg-none">
+							<div class="mobile-menu clearfix">
+								<a href="../index.html" class="mobile-logo">
+									<img src="/static/img/logo/white.png" alt="mobile logo">
+								</a>
+							</div>
+						</div>
+					</div>
+				</header>
+
+				<!-- Hero Area -->
+				<div class="hero-area bg-white">
+					<div class="container">
+						<div class="hero-area-inner">
+							<div class="hero-area-text">
+								<h1>
+									HELLO, <br>
+									I AM  CUCKOO...
+								</h1>
+								<h5>Poetry in movie，dancing close to me.</h5>
+							</div>
+							<div class="hero-area-image">
+								<img src="/static/img/white.png" alt="man mask">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--// Hero Area -->
+
+				<!-- Page Conttent -->
+				<main class="page-content">
+
+					<!-- Service Area -->
+					<div class="cr-section services-area section-padding-bottom-lg bg-white">
+						<div class="container">
+							<div class="row justify-content-center">
+								<div class="col-lg-7">
+									<div class="section-title text-center">
+										<h2><br /><br /><br /></h2>
+										<h2>WHICH I PROVIDE</h2>
+										<p>Here is the services which i know & provide all the time</p>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+
+								<!-- Single Service -->
+								<div class="col-lg-6 col-md-6 col-12">
+									<div class="service text-center" >
+										<a href="../table/0"><h5 >Movie Table</h5></a>
+										<p>榜单电影，随心排序</p>
+									</div>
+								</div>
+								<!--// Single Service -->
+
+								<!-- Single Service -->
+								<div class="col-lg-6 col-md-6 col-12">
+									<div class="service text-center">
+										<a href="../actors/0"><h5>Model Actors</h5></a>
+										<p>鸡鸣而起，劳模榜样</p>
+									</div>
+								</div>
+								<!--// Single Service -->
+
+								<!-- Single Service -->
+								<div class="col-lg-6 col-md-6 col-12">
+									<div class="service text-center">
+										<a href="../trend/0"><h5>Movie Trend</h5></a>
+										<p>电影趋势，一键了解</p>
+									</div>
+								</div>
+
+								<div class="col-lg-6 col-md-6 col-12">
+									<div class="service text-center">
+										<a href="../share/0"><h5>Box Office Share</h5></a>
+										<p>票房占比，轻松查阅</p>
+									</div>
+								</div>
+								<!--// Single Service -->
+
+							</div>
+						</div>
+					</div>
+					<!--// Service Area -->
+
+				</main>
+				<!--// Page Conttent -->
+
+
+
+			</div>
+			<!--// Wrapper -->
+		</main>
+		<div class="search">
+			<button id="btn-search-close" class="btn btn--search-close" aria-label="Close search form"><svg class="icon icon--cross"><use href="#icon-cross"></use></svg></button>
+			<div class="search__inner search__inner--up">
+				<form style=".search__form" method="post" id="search_box">
+                    {% csrf_token %}
+					<input class="search__input" style="border-bottom-color:#888888" id="search" name="search" type="search" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+                    <span class="search__info">Hit enter to search or ESC to close</span>
+				</form>
+			</div>
+			<div class="search__inner search__inner--down">
+				<div class="search__related">
+					<div class="search__suggestion">
+						<p><br/></p>
+					</div>
+					<div class="search__suggestion">
+						<p><br/></p>
+					</div>
+					<div class="search__suggestion">
+						<h3 style="color:#ffffff">Suggestion</h3>
+						<!--<p>请输入您想要了解的：</p>-->
+						<p>电影名称/导演/演员</p>
+						<p><br/></p>
+						<p><br/></p>
+						<p><br/></p>
+						<p><br/></p>
+						<p><br/></p>
+
+					</div>
+				</div>
+			</div>
+		</div><!-- /search -->
+		<script src="/static/js/demo9.js"></script>
+		<script src="/static/js/vendor/modernizr-3.6.0.min.js"></script>
+		<script src="/static/js/vendor/jquery-3.3.1.min.js"></script>
+		<script src="/static/js/popper.min.js"></script>
+		<script src="/static/js/bootstrap.min.js"></script>
+		<script src="/static/js/plugins.js"></script>
+		<script src="/static/js/main.js"></script>
+{#		<script src="/static/js/gg_bd_ad_720x90.js" type="text/javascript"></script>#}
+{#		<script src="/static/js/follow.js" type="text/javascript"></script>#}
+	</body>
+</html>

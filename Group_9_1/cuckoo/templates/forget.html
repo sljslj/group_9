@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Login Cuckoo's World</title>
+    <link href="/static/css/demo_login.css" rel="stylesheet" type="text/css">
+    <script src="/static/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <!--Framework-->
+    <script src="/static/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="/static/js/jquery-ui.js" type="text/javascript"></script>
+    <!--End Framework-->
+     <script src="/static/js/forget-password.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#form').ffform({ animation: 'flip', submitButton: '#submit',
+                validationIndicator: '#validation', errorIndicator: '#error',
+                successIndicator: '#success', sendButton: '#send_idf',
+                'fields':
+                    [{ 'id': 'username', required: true, requiredMsg: 'User name is required',
+                        type: 'alpha', validate: true, msg: 'User name can only consist of letters, numbers and _'},
+                     { 'id': 'email', required: true, requiredMsg: 'E-mail is required',
+                        type: 'email', validate: true, msg: 'E-mail format error',},
+                     { 'id': 'password', required: true, requiredMsg: 'PassWord is required',
+                        type: 'alpha', validate:true, msg: 'Password can only consist of letters, numbers and _'},
+                     { 'id': 'idf_code', required: true, requiredMsg: 'Identifying code is required'},
+                    ] });
+        });
+    </script>
+</head>
+<body class={{ bg_class }}>
+    <div id="getintouch" class="fadeIn animated">
+        <div class="container" style="background: {{ container_color }}">
+            <h1 style="border-bottom: 0; color:{{ hello_color }}; font-family:'Dosis', sans-serif; letter-spacing: 2px; font-weight: 100; font-size: 20px">
+                <span>WELCOME TO CUCKOO's WORLD!</span>
+            </h1>
+        </div>
+        <div class="container" style="background: {{ container_color }}">
+            <form class="contact" action="../{{ index_url }}" method="post" id="form">
+                <div class="row clearfix">
+                    <div class="lbl" style="color:{{ hello_color }};">
+                        <label for="email">
+                            E-Mail</label>
+                    </div>
+                    <div class="ctrl">
+                        <input style="background:{{ box_color }}" type="text" id="email" name="email" >
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="lbl" style="color:{{ hello_color }};">
+                        <label for="username">
+                            User Name</label>
+                    </div>
+                    <div class="ctrl">
+                        <input style="background:{{ box_color }}" type="text" id="username" name="username" >
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="lbl" style="color:{{ hello_color }};">
+                        <label for="idf_code" >
+                            Identifying Code</label>
+                    </div>
+                    <div class="ctrl">
+                        <input  style="background:{{ box_color }}; width: 75%;" type="text" id="idf_code" name="idf_code">
+                        <button class="button" id="send_idf" style="line-height:7px;font-size:14px;margin-top:0px; width: 24%">SEND</button>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="lbl" style="color:{{ hello_color }};">
+                        <label for="password" >
+                            NEW PassWord</label>
+                    </div>
+                    <div class="ctrl">
+                        <input  style="background:{{ box_color }}" type="password" id="password" name="password">
+                    </div>
+                </div>
+                <div class="row  clearfix">
+                    <div class="span10 offset2" >
+                        <input type="submit" name="submit" id="submit" class="submit" value="SUBMIT" style="font-size:14px;width: 110px;height:48px;padding: 0px">
+                    </div>
+                </div>
+                <div class="row  clearfix">
+                    <div class="span10 offset2" >
+                    <a href="../{{ index_url }}" class="button" style="text-decoration-line: none;">HOME</a>
+                    </div>
+                </div>
+                    <a href="../login/{{ time_id }}" style="color:{{ register_color }}; font-size:15px; text-decoration: none">
+                        Something suddenly come to you?
+                    </a>
+            </form>
+            <div id="success" style="color:{{ hello_color }};">
+                Successful modification<br>Welcome back to Cuckoo's world!
+            </div>
+            <div id="error" style="color:{{ hello_color }};">
+                Something wrong, please try later.</div>
+            <div id="validation">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
